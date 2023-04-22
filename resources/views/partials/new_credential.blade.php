@@ -40,7 +40,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-secondary"
                         wire:click='openModal(false)'>Close</button>
-                    <button type="button" class="btn btn-primary" wire:click='save()'> {{ $btnSave }} </button>
+                    <button type="button" class="btn btn-primary" wire:click='save(null)'> {{ $btnSave }} </button>
                     </div>
                 </div>
             </div>
