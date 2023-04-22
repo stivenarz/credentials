@@ -1,0 +1,27 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+
+
+.center-s{
+    justify-content: center;
+    align-items: center;
+}
+// .cels-table{
+//     max-width: 300px;
+// }
+.table-width{
+    max-width: 1000px;
+}
+.c-center{
+justify-content: center;
+}
+.h-full{
+    height: 100vh;
+}
