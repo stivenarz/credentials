@@ -7,14 +7,20 @@ use Livewire\Component;
 
 class Credentials extends Component
 {
-    public $credentials = [], $user, $ind = null, $error = null;
+    public $credentials = [],
+        $credential,
+        $user,
+        $ind = null,
+        $error = ['detail' => false, 'username' => false, 'password' => false],
+        $route = '',
+        $status,
+        $filter = null;
     public $detail = "", $username = "", $password = "";
     public $mTitle = "New credential", $btnSave = "Save", $modal = false;
 
     function __construct($id)
     {
-        $error = null;
-        $this->getCredentials();
+
     }
 
     function getCredentials()
@@ -46,41 +52,67 @@ class Credentials extends Component
         }
     }
 
+    public function create()
+    {
+        $this->credential = null;
+        $this->mTitle = 'New credential';
+        $this->btnSave = 'save';
+        $this->clearForm();
+        $this->openModal(true);
+    }
     public function edit($id)
     {
-        dd(`Editar credential con ID: {{$id}}`);
+        $this->credential = Credential::find($id);
+        $this->detail = $this->credential->detail;
+        $this->username = $this->credential->username;
+        $this->password = $this->credential->password;
+        $this->mTitle = 'Update credential';
+        $this->btnSave = 'Update';
+        $this->openModal(true);
     }
-    public function save($id)
+    public function save()
     {
+        $this->error = ['detail' => false, 'username' => false, 'password' => false];
+
+        // VALIDAR CAMPOS
         if ($this->detail == "") {
-            $this->error = 'detail';
-            return;
+            $this->error['detail'] = true;
         }
         if ($this->username == "") {
-            $this->error = 'username';
-            return;
+            $this->error['username'] = true;
         }
         if ($this->password == "") {
-            $this->error = 'password';
+            $this->error['password'] = true;
+        }
+        if ($this->error['detail'] === true || $this->error['username'] === true || $this->error['password'] === true ) {
             return;
         }
+        // GUARDAR
+        if ($this->credential) {
+            $this->route = 'update';
 
-        if (!$id ) {
+            $newcredential = Credential::find($this->credential->id);
+        } else {
+            $this->route = 'save';
+
             $newcredential = new Credential;
             $newcredential->userID = auth()->user()->id;
-        } else {
-            $newcredential = Credential::get($id);
         }
         $newcredential->detail = $this->detail;
         $newcredential->username = $this->username;
         $newcredential->password = $this->password;
-
         $newcredential->save();
 
-        $this->clearForm();
-        $this->getCredentials();
+        if (!$this->credential) {
+            $this->clearForm();
+        }
     }
 
+    public function delete($id)
+    {
+        $credential = Credential::find($id);
+        $credential->delete();
+    }
     function clearForm()
     {
         $this->detail = "";
@@ -90,6 +122,18 @@ class Credentials extends Component
 
     public function render()
     {
-        return view('livewire.credentials')->with(['modal' => $this->modal]);
+        $this->getCredentials();
+
+        switch ($this->route) {
+            case 'save':
+                $this->route = '';
+                return view('livewire.credentials')->with('Status', "Credential added successful");
+            case 'update':
+                $this->route = '';
+                return view('livewire.credentials')->with('Status', "Credential updated successful");
+
+            default:
+                return view('livewire.credentials');
+        }
     }
 }

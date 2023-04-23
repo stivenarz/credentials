@@ -6,7 +6,7 @@
                     <div class="d-flex justify-content-between">
                         <h3>{{ auth()->user()->name }}'s credentials</h3>
                         {{-- @include('partials.add_credential') --}}
-                        <button type="button" class="btn btn-primary" wire:click='openModal(true)' id="btnOpenModal">Add
+                        <button type="button" class="btn btn-primary" wire:click='create()' id="btnOpenModal">Add
                             new</button>
                     </div>
                 </tr>
@@ -16,7 +16,8 @@
                     <tr>
                         <th class="text-bold text-primary" style="width: 30%">DETAILS</th>
                         <th class="text-bold text-primary" style="width: 30%">USERNAME</th>
-                        <th class="text-bold text-primary" style="width: 40%">PASSWORD</th>
+                        <th class="text-bold text-primary" style="width: 30%">PASSWORD</th>
+                        <th class="text-bold text-primary" style="width: 10%">ACTIONS</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -24,16 +25,16 @@
                         <tr>
                             <td class="cels-table">{{ $credential->detail }}</td>
                             <td class="cels-table">{{ $credential->username }}</td>
-                            <td class="cels-table" key='{{ $credential->id }}'>
-                                <div class="btn-group d-flex justify-content-between">
-                                    {{ $credential->id == $ind ? $credential->password : '*****' }}
-                                    <div class="btn-group">
-                                        <button id="id" class="btn btn-success"
-                                            wire:click="setID( {{ $credential->id }} )"
-                                            onclick="hidepassword()">See</button>
+                            <td class="cels-table">{{ $credential->id == $ind ? $credential->password : '*****' }}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button id="id" class="btn btn-success"
+                                        wire:click="setID( {{ $credential->id }} )"
+                                        onclick="hidepassword()">See</button>
                                         <button id="" class="btn btn-primary"
-                                            wire:click="edit( {{ $credential->id }} )">Edit</button>
-                                    </div>
+                                        wire:click="edit( {{ $credential->id }} )">Edit</button>
+                                        <button id="id" class="btn btn-danger"
+                                            wire:click="delete( {{ $credential->id }} )">Delete</button>
                                 </div>
                             </td>
                         </tr>
