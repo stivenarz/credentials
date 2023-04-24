@@ -13,15 +13,23 @@
     justify-content: center;
     align-items: center;
 }
-// .cels-table{
-//     max-width: 300px;
-// }
 .table-width{
     max-width: 1000px;
+}
+.table-height{
+    max-height: 83vh;
 }
 .c-center{
 justify-content: center;
 }
 .h-full{
     height: 100vh;
+}
+.img-width{
+    width: 30px;
+    margin-top: 4px;
+}
+.img-input{
+    position: absolute;
+    right: 35px;
 }

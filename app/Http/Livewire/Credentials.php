@@ -14,13 +14,14 @@ class Credentials extends Component
         $error = ['detail' => false, 'username' => false, 'password' => false],
         $route = '',
         $status,
-        $filter = null;
+        $filter = null,
+        $pass=false;
     public $detail = "", $username = "", $password = "";
     public $mTitle = "New credential", $btnSave = "Save", $modal = false;
 
     function __construct($id)
     {
-
+        // $this->openModal(true);
     }
 
     function getCredentials()
@@ -36,6 +37,7 @@ class Credentials extends Component
             $this->modal = true;
         } else {
             $this->modal = false;
+            $this->credential = null;
         }
     }
 
@@ -52,9 +54,18 @@ class Credentials extends Component
         }
     }
 
+    public function setPass($on)
+    {
+        if ($on === true) {
+            $this->pass = true;
+        }else{
+            $this->pass = false;
+        }
+    }
+
     public function create()
     {
-        $this->credential = null;
+        $this->credential = new Credential;
         $this->mTitle = 'New credential';
         $this->btnSave = 'save';
         $this->clearForm();
@@ -85,25 +96,22 @@ class Credentials extends Component
             $this->error['password'] = true;
         }
         if ($this->error['detail'] === true || $this->error['username'] === true || $this->error['password'] === true ) {
+            // dd('error validation');
             return;
         }
         // GUARDAR
-        if ($this->credential) {
+        if ($this->credential->id) {
             $this->route = 'update';
-
-            $newcredential = Credential::find($this->credential->id);
         } else {
             $this->route = 'save';
-
-            $newcredential = new Credential;
-            $newcredential->userID = auth()->user()->id;
         }
-        $newcredential->detail = $this->detail;
-        $newcredential->username = $this->username;
-        $newcredential->password = $this->password;
-        $newcredential->save();
+        $this->credential->userID = auth()->user()->id;
+        $this->credential->detail = $this->detail;
+        $this->credential->username = $this->username;
+        $this->credential->password = $this->password;
+        $this->credential->save();
 
-        if (!$this->credential) {
+        if ($this->route === 'save') {
             $this->clearForm();
         }
     }
