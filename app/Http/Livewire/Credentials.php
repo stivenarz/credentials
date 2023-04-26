@@ -8,26 +8,30 @@ use Livewire\Component;
 class Credentials extends Component
 {
     public $credentials = [],
-        $credential,
-        $user,
-        $ind = null,
-        $error = ['detail' => false, 'username' => false, 'password' => false],
-        $route = '',
-        $status,
-        $filter = null,
-        $pass=false;
+    $credential,
+    $user,
+    $ind = null,
+    $error = ['detail' => false, 'username' => false, 'password' => false],
+    $route = '',
+    $status,
+    $search = '',
+    $pass = false;
     public $detail = "", $username = "", $password = "";
     public $mTitle = "New credential", $btnSave = "Save", $modal = false;
 
-    function __construct($id)
+    function __construct()
     {
+        // $this->setID(58);
         // $this->openModal(true);
     }
 
     function getCredentials()
     {
         if (auth()) {
-            $this->credentials = Credential::get()->where('userID', auth()->user()->id);
+            $this->credentials = Credential::where('userID', auth()->user()->id)
+                ->where('detail', 'like', '%' . $this->search . '%')
+                ->get()
+            ;
         }
     }
 
@@ -52,13 +56,14 @@ class Credentials extends Component
         } else {
             $this->ind = null;
         }
+        $this->render();
     }
 
     public function setPass($on)
     {
         if ($on === true) {
             $this->pass = true;
-        }else{
+        } else {
             $this->pass = false;
         }
     }
@@ -67,7 +72,8 @@ class Credentials extends Component
     {
         $this->credential = new Credential;
         $this->mTitle = 'New credential';
-        $this->btnSave = 'save';
+        $this->btnSave = 'Save';
+        $this->error = ['detail' => false, 'username' => false, 'password' => false];
         $this->clearForm();
         $this->openModal(true);
     }
@@ -77,6 +83,7 @@ class Credentials extends Component
         $this->detail = $this->credential->detail;
         $this->username = $this->credential->username;
         $this->password = $this->credential->password;
+        $this->error = ['detail' => false, 'username' => false, 'password' => false];
         $this->mTitle = 'Update credential';
         $this->btnSave = 'Update';
         $this->openModal(true);
@@ -95,25 +102,25 @@ class Credentials extends Component
         if ($this->password == "") {
             $this->error['password'] = true;
         }
-        if ($this->error['detail'] === true || $this->error['username'] === true || $this->error['password'] === true ) {
+        if ($this->error['detail'] === true || $this->error['username'] === true || $this->error['password'] === true) {
             // dd('error validation');
             return;
         }
         // GUARDAR
-        if ($this->credential->id) {
-            $this->route = 'update';
-        } else {
-            $this->route = 'save';
-        }
         $this->credential->userID = auth()->user()->id;
         $this->credential->detail = $this->detail;
         $this->credential->username = $this->username;
         $this->credential->password = $this->password;
         $this->credential->save();
 
-        if ($this->route === 'save') {
+        if ($this->btnSave === 'Update') {
+            $this->route = 'update';
+        } else if($this->btnSave === 'Save') {
+            $this->route = 'save';
             $this->clearForm();
+            $this->credential = new Credential;
         }
+
     }
 
     public function delete($id)

@@ -7,29 +7,50 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-
-
-.center-s{
-    justify-content: center;
-    align-items: center;
+html,body {
+    margin: 0px;
+    min-height: 100%;
 }
-.table-width{
+
+.h-full {
+    min-height: 100%;
+}
+
+.w-full{
+    width: 100%;
+}
+.table-width {
     max-width: 1000px;
 }
-.table-height{
-    max-height: 83vh;
+
+.table-height {
+    max-height: 50%;
+    background-color: aqua;
+    border: solid yellow 2px;
 }
-.c-center{
-justify-content: center;
+
+.h-content{
+    // max-height: 20vh;
+    border: solid red 1px;
 }
-.h-full{
-    height: 100vh;
+
+.footer-end {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: -1;
 }
-.img-width{
+
+.img-width {
     width: 30px;
     margin-top: 4px;
 }
-.img-input{
+
+.img-input {
     position: absolute;
     right: 35px;
 }

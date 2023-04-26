@@ -16,6 +16,6 @@ class Credential extends Model
         'password',
     ];
     protected $hidden = [
-        'password',
+        // 'password',
     ];
 }
