@@ -1,4 +1,4 @@
-<div class="table-width m-auto" @if (!$modal) hidden @endif>
+<div class="table-width" @if (!$modal) hidden @endif>
 
     <!-- Modal -->
     <div class="card">
@@ -24,7 +24,7 @@
                         <div class="col-md-10">
                             <input class="form-control {{ $error['username'] == true ? 'is-invalid' : '' }}"
                                 type="text" name="username" id="username" wire:model='username'
-                                placeholder="input the username for your new credential" focus>
+                                placeholder="input the username for your new credential" autofocus>
                         </div>
                     </div>
                     <div class="row mb-2">

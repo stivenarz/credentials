@@ -7,43 +7,69 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-html,body {
+html,body{
     margin: 0px;
-    min-height: 100%;
+    top: 0;
+    bottom: 0;
+    min-height: 100vh;
 }
-
-.h-full {
-    min-height: 100%;
+.root{
+    background-color: black;
+    border: solid 2px red;
+    height: 100%;
+    // display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-
-.w-full{
-    width: 100%;
+.header{
+    background-color: aqua;
+    min-height: 6%;
+    margin: 1px;
+}
+.main{
+    background-color: blueviolet;
+    border: solid 2px red;
+    height: 85%;
+    margin: 1px;
+    display: flex;
+    flex-direction: column;
+    // align-items: flex-start;
+    overflow: scroll;
+}
+.app-content{
+    background-color: blueviolet;
+    border: solid 2px red;
+    // max-height: 100%;
+    margin: 1px;
+    display: flex;
+    align-items: flex-start;
+    // overflow-y: scroll;
+    // overflow-x: auto;
+}
+.content-header{
+    display: flex;
+    justify-content: space-around;
+}
+.footer{
+    background-color: aquamarine;
+    height: 8%;
+    margin: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .table-width {
     max-width: 1000px;
 }
 
-.table-height {
-    max-height: 50%;
-    background-color: aqua;
-    border: solid yellow 2px;
-}
+// .table-height {
+//     height: 70vh;
+//     background-color: aqua;
+//     border: solid yellow 2px;
+// }
 
-.h-content{
-    // max-height: 20vh;
-    border: solid red 1px;
-}
 
-.footer-end {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    z-index: -1;
-}
 
 .img-width {
     width: 30px;

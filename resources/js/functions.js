@@ -8,7 +8,7 @@ function logOut(on = null) {
     //         }, 60000);
     // }
 }
-// const appCredentials = document.getElementById("app");
+
 window.addEventListener("mousemove", function () {
     logOut(true);
 });
@@ -16,5 +16,11 @@ window.addEventListener("keyup", function () {
     logOut(true);
 });
 
-
-
+window.addEventListener('resize', () => {
+    HeightDiv()
+});
+function HeightDiv() {
+    var vHeight = `${window.innerHeight}px`;
+    document.getElementById('root').style.height = vHeight;
+}
+HeightDiv();

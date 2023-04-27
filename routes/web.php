@@ -23,4 +23,4 @@ Route::get('/', function(){
 
 Auth::routes();
 
-Route::view('/credentials', 'credentials')->name('credentials');
+Route::view('/prueba', 'prueba')->name('prueba');

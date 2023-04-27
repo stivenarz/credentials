@@ -1,0 +1,39 @@
+html,body{
+    margin: 0px;
+    top: 0;
+    bottom: 0;
+    min-height: 100vh;
+}
+
+.root{
+    background-color: brown;
+    border: solid 2px red;
+    height: 100%;
+}
+
+.navigation{
+    background-color: blue;
+    margin: 1px;
+    min-height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.body{
+    background-color: aquamarine;
+    margin: 1px;
+    min-height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer{
+    background-color:blueviolet;
+    margin: 1px;
+    min-height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

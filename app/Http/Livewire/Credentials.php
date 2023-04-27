@@ -24,17 +24,24 @@ class Credentials extends Component
         // $this->setID(58);
         // $this->openModal(true);
     }
-
-    function getCredentials()
+    protected $listeners = [
+        'getSearch' => 'getSearch',
+    ];
+    function getCredentials($search = '')
     {
         if (auth()) {
             $this->credentials = Credential::where('userID', auth()->user()->id)
-                ->where('detail', 'like', '%' . $this->search . '%')
+                ->where('detail', 'like', '%' . $search . '%')
                 ->get()
             ;
         }
     }
 
+    public function getSearch($data)
+    {
+        $this->search = $data;
+        $this->getCredentials();
+    }
     public function openModal($on)
     {
         if ($on) {
@@ -70,6 +77,7 @@ class Credentials extends Component
 
     public function create()
     {
+        dd('create');
         $this->credential = new Credential;
         $this->mTitle = 'New credential';
         $this->btnSave = 'Save';
@@ -79,6 +87,7 @@ class Credentials extends Component
     }
     public function edit($id)
     {
+        dd('edit');
         $this->credential = Credential::find($id);
         $this->detail = $this->credential->detail;
         $this->username = $this->credential->username;
@@ -90,6 +99,7 @@ class Credentials extends Component
     }
     public function save()
     {
+        dd('save');
         $this->error = ['detail' => false, 'username' => false, 'password' => false];
 
         // VALIDAR CAMPOS
@@ -115,8 +125,10 @@ class Credentials extends Component
 
         if ($this->btnSave === 'Update') {
             $this->route = 'update';
-        } else if($this->btnSave === 'Save') {
+            // $this->status = "Credential added successful";
+        } else if ($this->btnSave === 'Save') {
             $this->route = 'save';
+            // $this->status = "Credential updated successful";
             $this->clearForm();
             $this->credential = new Credential;
         }
@@ -125,6 +137,7 @@ class Credentials extends Component
 
     public function delete($id)
     {
+        dd('delete');
         $credential = Credential::find($id);
         $credential->delete();
     }
@@ -137,7 +150,8 @@ class Credentials extends Component
 
     public function render()
     {
-        $this->getCredentials();
+        $this->getCredentials($this->search);
+// dd($this->modal);
 
         switch ($this->route) {
             case 'save':
@@ -150,5 +164,6 @@ class Credentials extends Component
             default:
                 return view('livewire.credentials');
         }
+        // return view('livewire.credentials')->with('Status', $this->status);
     }
 }
