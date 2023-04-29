@@ -15,6 +15,18 @@
         </div>
         <div id="body" class="body">
             body
+            <div class="hea">
+                Header
+                <div class="encabezado">
+                    encabezado
+                </div>
+            </div>
+            <div class="bod">
+                content
+            </div>
+            <div class="foo">
+                pie de page
+            </div>
         </div>
         <div id="footer" class="footer">
             footer

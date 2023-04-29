@@ -7,76 +7,79 @@
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
 
-html,body{
+html,
+body {
     margin: 0px;
     top: 0;
     bottom: 0;
     min-height: 100vh;
+    // background-color:rgb(75, 76, 80);
 }
-.root{
-    background-color: black;
-    border: solid 2px red;
+
+html,
+body,
+header,
+main,
+footer,
+table {
+    // color: white;
+}
+
+.root {
     height: 100%;
-    // display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.header{
-    background-color: aqua;
-    min-height: 6%;
-    margin: 1px;
+
+.header {
+    // background-color: rgba(0, 0, 0, 0.558);
+    height: 6%;
+    z-index: 3;
 }
-.main{
-    background-color: blueviolet;
-    border: solid 2px red;
-    height: 85%;
-    margin: 1px;
+
+.main {
+    height: 86%;
     display: flex;
     flex-direction: column;
-    // align-items: flex-start;
-    overflow: scroll;
+    margin: auto;
+    z-index: -1;
 }
-.app-content{
-    background-color: blueviolet;
-    border: solid 2px red;
-    // max-height: 100%;
-    margin: 1px;
-    display: flex;
-    align-items: flex-start;
-    // overflow-y: scroll;
-    // overflow-x: auto;
-}
-.content-header{
-    display: flex;
-    justify-content: space-around;
-}
-.footer{
-    background-color: aquamarine;
+
+.footer {
     height: 8%;
-    margin: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
+    z-index: 9999;
 }
-.table-width {
+
+.app-container {
     max-width: 1000px;
+    margin: auto;
+    z-index: -3;
 }
 
-// .table-height {
-//     height: 70vh;
-//     background-color: aqua;
-//     border: solid yellow 2px;
-// }
+.header-content {
+    z-index:-1;
+}
 
+.body-content {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    z-index: -2;
+}
 
+.footer-content {
+    display: flex;
+}
 
+.control-style{
+    background-color: rgba(0, 0, 0, 0.558);
+    color: white;
+}
 .img-width {
     width: 30px;
     margin-top: 4px;
-}
-
-.img-input {
-    position: absolute;
-    right: 35px;
 }

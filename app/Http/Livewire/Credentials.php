@@ -77,7 +77,6 @@ class Credentials extends Component
 
     public function create()
     {
-        dd('create');
         $this->credential = new Credential;
         $this->mTitle = 'New credential';
         $this->btnSave = 'Save';
@@ -87,7 +86,6 @@ class Credentials extends Component
     }
     public function edit($id)
     {
-        dd('edit');
         $this->credential = Credential::find($id);
         $this->detail = $this->credential->detail;
         $this->username = $this->credential->username;
@@ -99,7 +97,6 @@ class Credentials extends Component
     }
     public function save()
     {
-        dd('save');
         $this->error = ['detail' => false, 'username' => false, 'password' => false];
 
         // VALIDAR CAMPOS
@@ -113,7 +110,6 @@ class Credentials extends Component
             $this->error['password'] = true;
         }
         if ($this->error['detail'] === true || $this->error['username'] === true || $this->error['password'] === true) {
-            // dd('error validation');
             return;
         }
         // GUARDAR
@@ -137,7 +133,6 @@ class Credentials extends Component
 
     public function delete($id)
     {
-        dd('delete');
         $credential = Credential::find($id);
         $credential->delete();
     }
@@ -151,7 +146,6 @@ class Credentials extends Component
     public function render()
     {
         $this->getCredentials($this->search);
-// dd($this->modal);
 
         switch ($this->route) {
             case 'save':
@@ -164,6 +158,5 @@ class Credentials extends Component
             default:
                 return view('livewire.credentials');
         }
-        // return view('livewire.credentials')->with('Status', $this->status);
     }
 }

@@ -10,37 +10,22 @@
     {{-- TITLE SHEET --}}
     <title>{{ config('app.name', 'Laravel') }}</title>
     {{-- ICON SHEET --}}
-    <link rel="icon" href="/ico/security.svg">
+    @auth
+        <link rel="icon" href="/ico/security-open.svg">
+    @else
+        <link rel="icon" href="/ico/security-close.svg">
+    @endauth
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    @yield('header')
+    @vite(['resources/sass/app.scss', 'resources/js/app.js', 'resources/js/functions.js'])
+    @yield('head')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     @livewireStyles
 </head>
-{{-- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
-    <!-- CSRF Token -->
-    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
-    {{-- TITLE SHEET --}}
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    {{-- ICON SHEET --}}<!-- Fonts -->
-    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <link rel="icon" href="/ico/security.svg"> --}}
-    <!-- Scripts -->
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    @yield('header')
-@livewireStyles
-</head> --}}
 
 <body>
     <div id="root" class="root">
@@ -50,11 +35,13 @@
         <main id="main" class="main">
             @yield('content')
         </main>
-        <footer class="footer">
+        <footer class="footer control-style">
             Copyright ©® 2023 | created by SNARZ | general idea by Lean
         </footer>
     </div>
 </body>
 
 @livewireScripts
+
 </html>
+
